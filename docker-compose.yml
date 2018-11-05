@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+
+  # MySQL
+  mysql:
+    build:
+      context: ./
+      dockerfile: mysql.dockerfile
+    restart: always
+    environment:
+      - MYSQL_DATABASE=homestead
+      - MYSQL_ROOT_PASSWORD=secret
+    ports:
+      - "33061:3306"
+
+  # Health
+  health:
+    build:
+      context: ./
+      dockerfile: health.dockerfile
+    working_dir: /health/repository
+    restart: on-failure
+    volumes:
+      - ./root/.composer:/root/.composer
+      - ./health/config/health:/health/repository/config/health
+      - ./health/repository/.env:/health/repository/.env
+      - ./health/repository/storage:/health/repository/storage
+      - ./health/repository/routes/web.php:/health/repository/routes/web.php
+    command: bash /health/start.sh
+    ports:
+      - "8087:8087"
+    links:
+      - mysql
