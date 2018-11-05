@@ -21,16 +21,14 @@ cd health-docker
 docker-compose build
 ```
 
-### start mysql and wait for it to start
+### configure
+
+Edit the docker-compose.yml and eventually provide a new configuration folder with docker volumes or provide new values for environment variables.
+
+### start the services
 
 ```bash
-docker-compose up mysql &
-```
-
-### start the panel
-
-```bash
-docker-compose up health
+docker-compose up -d
 ```
 
 ### open in your preferred browser

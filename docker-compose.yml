@@ -4,9 +4,7 @@ services:
 
   # MySQL
   mysql:
-    build:
-      context: ./
-      dockerfile: mysql.dockerfile
+    image: mysql:5.7
     restart: always
     environment:
       - MYSQL_DATABASE=homestead
@@ -14,20 +12,31 @@ services:
     ports:
       - "33061:3306"
 
+  redis:
+    image: redis
+
+
   # Health
   health:
-    build:
-      context: ./
-      dockerfile: health.dockerfile
-    working_dir: /health/repository
-    restart: on-failure
-    volumes:
-      - ./root/.composer:/root/.composer
-      - ./health/config/health:/health/repository/config/health
-      - ./health/repository/.env:/health/repository/.env
-      - ./health/repository/storage:/health/repository/storage
-    command: bash /health/start.sh
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        LARAVEL_TAG: v5.6.12
+        LARAVEL_HEALTH_VERSION: v0.9.16
+    restart: "on-failure"
     ports:
       - "8087:8087"
-    links:
+    depends_on:
       - mysql
+    volumes:
+      - ./storage:/health/repository/storage
+      - ./custom_health_conf:/health/repository/config/health:ro
+    environment:
+      - APP_URL=http://localhost:8087/
+      - APP_DEBUG=false
+      - REDIS_HOST=redis
+      # - PUSHER_APP_ID=
+      # - PUSHER_APP_KEY=
+      # - PUSHER_APP_SECRET=
+      # - SLACK_WEBHOOK_URL=

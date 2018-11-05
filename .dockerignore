@@ -1,0 +1,5 @@
+# ignore everything by default
+**
+
+# but the following paths
+!build/**

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'App Health Check Panel',
+    'title' => 'My Custom App Health Check Panel',
 
     'resources' => [
         'path' => config_path('health/resources'),
