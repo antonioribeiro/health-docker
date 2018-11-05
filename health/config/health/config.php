@@ -139,7 +139,7 @@ return [
     ],
 
     'routes' => [
-        'prefix' => $route_prefix = '/',
+        'prefix' => $route_prefix = '/health',
 
         'namespace' => $namespace = 'PragmaRX\Health\Http\Controllers\Health',
 

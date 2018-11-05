@@ -26,7 +26,6 @@ services:
       - ./health/config/health:/health/repository/config/health
       - ./health/repository/.env:/health/repository/.env
       - ./health/repository/storage:/health/repository/storage
-      - ./health/repository/routes/web.php:/health/repository/routes/web.php
     command: bash /health/start.sh
     ports:
       - "8087:8087"
