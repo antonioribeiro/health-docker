@@ -1,10 +1,10 @@
-# Health Panel for Docker Environment
+# App Health Panel for Docker Environment
 
 ![default panel](https://github.com/antonioribeiro/health/raw/master/docs/images/panel.png)
 
 ## What?
 
-This is a docker installation for the Laravel Health Panel, which can be used to check the health of any application.
+This is a docker installation for the [Laravel Health Panel](https://github.com/antonioribeiro/health), which can be used to check the health of any application.
 
 ## Running
 
